@@ -1,0 +1,49 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Molina
+@using Data;
+@using Molina.Models;
+@model Molina.Models.ViewModels.SizeListViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <h1>Список размеров</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3">
+                <a class="btn btn-primary" asp-controller="AdminStuff" asp-action="CreateSize">Добавить размер</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                @if (Model.Sizes.Count == 0)
+                {
+                    <p>Список размеров пуст</p>
+                }
+                else
+                {
+                    <form method="get" asp-controller="AdminStuff" asp-action="SizesList">
+                        <div class="form-inline">
+                            <label>Имя: </label>
+                            <input name="search" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+                            <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
+                        </div>
+                    </form>
+
+                    <table class="table">
+                        @foreach (Size u in Model.Sizes)
+                        {
+                            <tr><td>@u.Name</td><td>@u.CreatedDate</td></tr>
+                        }
+                    </table>
+                    <page-link page-view-model="Model.PageViewModel"
+                               page-action="SizesList"
+                               page-url-sortOrder="@(Model.SortViewModel.Current)"></page-link>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

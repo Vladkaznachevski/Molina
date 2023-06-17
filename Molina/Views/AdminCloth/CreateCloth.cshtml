@@ -1,0 +1,42 @@
+﻿@model Molina.Models.ViewModels.ClothViewModel
+@{
+
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1>Добавление новой одежды</h1>
+    </div>
+    <div class="card-body">
+        <form asp-controller="AdminCloth" asp-action="CreateCloth" method="post">
+            <div class="mb-3">
+                <label class="form-label">Выберите класс</label>
+                @if (Model.Classes != null)
+                {
+                    @Html.DropDownListFor(m => m.Selected,  Model.Classes.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }) , "Default label", new { @class = "css-class" })
+                }
+                <label class="form-label">Выберите материал</label>
+                <br />
+                @if (Model.Materials != null)
+                {
+                    @Html.DropDownListFor(m => m.Selected2, Model.Materials.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }), "Default label", new { @class = "css-class" })
+                }
+                <br />
+                <label class="form-label">Выберите размер</label>
+                <br />
+                @if (Model.Sizes != null)
+                {
+                    @Html.DropDownListFor(m => m.Selected3, Model.Sizes.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }), "Default label", new { @class = "css-class" })
+                }
+                <br />
+                <label asp-for="Name" class="form-label">Название</label>
+                <input type="text" class="form-control" asp-for="Name">
+
+                <label asp-for="Price" class="form-label">Цена</label>
+                <input type="text" class="form-control" asp-for="Price">
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
