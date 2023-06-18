@@ -37,6 +37,7 @@ namespace Repository.ShopCartRepo
                 Cloth = cloth,
                 Name = cloth.Name,
                 Price = cloth.Price,
+                CreatedDate = DateTime.Now,
 
             });
             _context.SaveChanges();

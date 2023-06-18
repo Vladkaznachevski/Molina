@@ -23,6 +23,7 @@ namespace Repository.OrderRepo
         public void CreateOrder(Order order)
         {
             order.orderTime = DateTime.Now; // Задаём время заказа
+            order.CreatedDate = DateTime.Now;
 
             _context.Orders.Add(order); // Добавляем заказ в SQL таблицу
             _context.SaveChanges();
@@ -34,6 +35,7 @@ namespace Repository.OrderRepo
                 {
                     ClothId = el.Cloth.Id, // Заполняем айди Еды
                     OrderId = order.Id, // заполняем айди Заказа
+                    CreatedDate = DateTime.Now,
                 };
                 _context.OrderDetails.Add(orderDetail);
             }
